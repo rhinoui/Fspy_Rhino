@@ -48,12 +48,12 @@ The official workflow only supports Blender (via [fSpy-Blender](https://github.c
    Drag `rhino_paste_fspy.py` onto the Rhino window (may require enabling script execution in Rhino options).
 
    **Method C — Toolbar Button / Alias (recommended):**
-   Create a toolbar button with this command (use forward slashes for the path):
+   Create a toolbar button with this command (replace the path with your own):
    ```
-   ! _-RunPythonScript "C:/Users/YourName/RhinoScripts/rhino_paste_fspy.py"
+   ! _-RunPythonScript "E:/Rhinoceros/Plugin/Cam_Sync/rhino_paste_fspy.py"
    ```
    > **Note:** Rhino on Windows accepts forward slashes (`/`) in paths.  
-   > If you prefer backslashes, double them: `"C:\\Users\\YourName\\...\\rhino_paste_fspy.py"`
+   > If you prefer backslashes, double them: `"E:\\Rhinoceros\\Plugin\\Cam_Sync\\rhino_paste_fspy.py"`
 
 ## Usage
 
