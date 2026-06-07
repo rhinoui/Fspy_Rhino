@@ -77,6 +77,20 @@ If a named view `fSpy_Sync` already exists:
 
 Make sure fSpy is configured with **Y-up** coordinate system (the default). This matches Rhino's coordinate system directly — no axis conversion is needed.
 
+### ⚠️ Unit Input Rule (Important)
+
+Due to a design limitation in fSpy, the **unit dropdown** in the interface (mm / cm / m) does **not** affect the exported camera matrix — it is always exported in unitless absolute values. To ensure the camera position in Rhino matches your model dimensions precisely, you **must** follow this rule:
+
+> **Always treat the Reference Distance input as meters, regardless of what the dropdown shows.**
+
+| Actual Measurement | fSpy Input |
+|---|---|
+| 800 mm | `0.8` |
+| 20 mm | `0.02` |
+| 2 m | `2` |
+
+**Why this works:** The Rhino script uses `UnitScale` to automatically read your current Rhino document's unit system (mm, cm, m, etc.) and convert the meter-based data from fSpy to the correct scale for your scene. As long as you input the reference distance in meters, the import will be 1:1 accurate.
+
 ## Coordinate System Reference
 
 | Axis | fSpy (Y-up) | Rhino |
