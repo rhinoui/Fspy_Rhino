@@ -6,11 +6,18 @@ This script reads an fSpy JSON file and applies the reconstructed camera — pos
 
 ## Why
 
-fSpy is a popular tool for reconstructing 3D cameras from 2D images, but it only natively exports to Blender. This script fills the gap for Rhino users who need accurate camera match in their modeling workflow.
+fSpy is a popular tool for reconstructing 3D cameras from 2D images.  
+The official workflow only supports Blender (via [fSpy-Blender](https://github.com/stuffmatic/fSpy-Blender)), leaving Rhino users without a native solution. This script fills that gap.
+
+## Credits & References
+
+- **[fSpy](https://fspy.io/)** — The camera matching application this script reads from.
+- **[fSpy-Blender](https://github.com/stuffmatic/fSpy-Blender)** — The official Blender importer. This project's focal-length and principal-point shift math is adapted from its source code (`fspy_blender/importer.py`), ported from Blender Python API to Rhino IronPython.
+- **Coordinate system note:** fSpy outputs a Y-up camera transform. Both Blender and Rhino use Y-up, so no axis-swap is needed — the same transform matrix logic works for both.
 
 ## Features
 
-- Parse fSpy JSON camera transform (position, rotation, focal length)
+- Parse fSpy JSON camera transform (position, orientation, focal length)
 - Compute principal-point shift and apply via Rhino frustum offset
 - Automatically set render resolution to match the source image
 - Save camera as a named view (with overwrite / rename dialog)
@@ -28,29 +35,33 @@ fSpy is a popular tool for reconstructing 3D cameras from 2D images, but it only
 
 ## Installation
 
-1. Download or clone this repository
-2. In Rhino, run the script via one of these methods:
+1. Download or clone this repository.
+2. Place `rhino_paste_fspy.py` in a stable location (e.g. `C:/Users/YourName/RhinoScripts/`).
+3. In Rhino, run the script via one of these methods:
 
    **Method A — Rhino Python Editor:**
    ```
-   _EditPythonScript → File → Open → rhino_paste_fspy.py → Run
+   _EditPythonScript → File → Open → select rhino_paste_fspy.py → Run
    ```
 
    **Method B — Drag & Drop:**
-   Drag `rhino_paste_fspy.py` onto the Rhino window (may require enabling script execution in Rhino options)
+   Drag `rhino_paste_fspy.py` onto the Rhino window (may require enabling script execution in Rhino options).
 
-   **Method C — Alias / Toolbar Button:**
+   **Method C — Toolbar Button / Alias (recommended):**
+   Create a toolbar button with this command (use forward slashes for the path):
    ```
-   ! _-RunPythonScript "full/path/to/rhino_paste_fspy.py"
+   ! _-RunPythonScript "C:/Users/YourName/RhinoScripts/rhino_paste_fspy.py"
    ```
+   > **Note:** Rhino on Windows accepts forward slashes (`/`) in paths.  
+   > If you prefer backslashes, double them: `"C:\\Users\\YourName\\...\\rhino_paste_fspy.py"`
 
 ## Usage
 
-1. Open fSpy, load your reference image, and adjust the vanishing points / horizon
-2. Export the project: **File → Save** (produces a JSON file with no extension, or `.json`)
-3. In Rhino, run the script
-4. A file dialog appears — select the fSpy JSON file
-5. The active viewport camera is updated and a named view `fSpy_Sync` is saved
+1. Open fSpy, load your reference image, and adjust the vanishing points / horizon.
+2. Export the project: **File → Save** (produces a file with no extension, or `.json`).
+3. In Rhino, run the script (via any method above).
+4. A file dialog appears — select the fSpy JSON file.
+5. The active viewport camera is updated and a named view `fSpy_Sync` is saved.
 
 ### Named View Handling
 
@@ -71,8 +82,14 @@ Make sure fSpy is configured with **Y-up** coordinate system (the default). This
 | Axis | fSpy (Y-up) | Rhino |
 |---|---|---|
 | Right | +X | +X |
-| Forward | -Z (camera look) | +Y |
+| Forward | -Z (camera look direction) | +Y |
 | Up | +Y | +Z |
+
+## Troubleshooting
+
+- **"Not a valid fSpy JSON file"** — Make sure you exported via *File → Save* in fSpy, not *Export for Blender*.
+- **Camera looks wrong** — Verify fSpy's camera transform in *View → Show Camera*. The matrix should be Y-up.
+- **Script doesn't run** — Check that Rhino's Python editor is enabled (*Tools → Options → Python*).
 
 ## License
 
