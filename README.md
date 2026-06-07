@@ -36,24 +36,24 @@ The official workflow only supports Blender (via [fSpy-Blender](https://github.c
 ## Installation
 
 1. Download or clone this repository.
-2. Place `rhino_paste_fspy.py` in a stable location (e.g. `C:/Users/YourName/RhinoScripts/`).
+2. Place `fspy2rhino.py` in a stable location (e.g. `C:/Users/YourName/RhinoScripts/`).
 3. In Rhino, run the script via one of these methods:
 
    **Method A — Rhino Python Editor:**
    ```
-   _EditPythonScript → File → Open → select rhino_paste_fspy.py → Run
+   _EditPythonScript → File → Open → select fspy2rhino.py → Run
    ```
 
    **Method B — Drag & Drop:**
-   Drag `rhino_paste_fspy.py` onto the Rhino window (may require enabling script execution in Rhino options).
+   Drag `fspy2rhino.py` onto the Rhino window (may require enabling script execution in Rhino options).
 
    **Method C — Toolbar Button / Alias (recommended):**
    Create a toolbar button with this command (replace the path with your own):
    ```
-   ! _-RunPythonScript "E:/Rhinoceros/Plugin/Cam_Sync/rhino_paste_fspy.py"
+   ! _-RunPythonScript "E:/Rhinoceros/Plugin/Cam_Sync/fspy2rhino.py"
    ```
    > **Note:** Rhino on Windows accepts forward slashes (`/`) in paths.  
-   > If you prefer backslashes, double them: `"E:\\Rhinoceros\\Plugin\\Cam_Sync\\rhino_paste_fspy.py"`
+   > If you prefer backslashes, double them: `"E:\\Rhinoceros\\Plugin\\Cam_Sync\\fspy2rhino.py"`
 
 ## Usage
 
