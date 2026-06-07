@@ -17,9 +17,11 @@ The official workflow only supports Blender (via [fSpy-Blender](https://github.c
 
 ## Features
 
-- Parse fSpy JSON camera transform (position, orientation, focal length)
+- Parse fSpy project files: both `.fspy` (binary) and `.json` formats
+- Reconstruct camera: position, orientation, focal length
 - Compute principal-point shift and apply via Rhino frustum offset
 - Automatically set render resolution to match the source image
+- **New:** Load the original reference image as Rhino viewport background (`.fspy` only)
 - Save camera as a named view (with overwrite / rename dialog)
 - Enable Rhino safe frame for visual alignment reference
 
@@ -58,10 +60,14 @@ The official workflow only supports Blender (via [fSpy-Blender](https://github.c
 ## Usage
 
 1. Open fSpy, load your reference image, and adjust the vanishing points / horizon.
-2. Export the project: **File → Save** (produces a file with no extension, or `.json`).
+2. Save the project: **File → Save** (produces a `.fspy` binary file **recommended**, or export as `.json`).
 3. In Rhino, run the script (via any method above).
-4. A file dialog appears — select the fSpy JSON file.
-5. The active viewport camera is updated and a named view `fSpy_Sync` is saved.
+4. A file dialog appears — select the `.fspy` or `.json` file.
+5. The script will:
+   - Reconstruct the camera and apply it to the active viewport
+   - **(`.fspy` only)** Load the original reference image as the viewport background
+   - Save a named view `fSpy_Sync`
+6. Enable the **Safe Frame** to align your model with the background image.
 
 ### Named View Handling
 
